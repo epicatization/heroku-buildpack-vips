@@ -4,6 +4,7 @@ ARG VIPS_VERSION
 
 # useful build tools ... we need gtk-doc to build orc, since they don't ship
 # pre-baked tarballs
+ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y \
 	build-essential \
 	autoconf \
@@ -33,7 +34,7 @@ RUN apt-get update && apt-get install -y \
 	liblcms2-dev \
 	libxml2-dev \
 	libfftw3-dev \
-  libpoppler-glib-dev
+	libpoppler-glib-dev
 
 ARG GIFLIB_VERSION=5.1.4
 ARG GIFLIB_URL=http://downloads.sourceforge.net/project/giflib
@@ -90,7 +91,7 @@ RUN cd /usr/src/vips \
 	&& rm -rf share/thumbnailers
 
 RUN cd /usr/src/vips \
-  && rm -rf build \
-  && mkdir build \
-  && tar czf \
-    /usr/src/vips/build/libvips.tar.gz bin include lib
+	&& rm -rf build \
+	&& mkdir build \
+	&& tar czf \
+	/usr/src/vips/build/libvips.tar.gz bin include lib
